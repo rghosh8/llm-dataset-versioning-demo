@@ -76,8 +76,12 @@ clean: clean-versions
 # Example: tag the code for v1.0.0
 .PHONY: tag-v1.0.0
 tag-v1.0.0:
-	git tag -a data-$(DATASET_NAME)-v1.0.0 -m "Dataset $(DATASET_NAME) v1.0.0 built"
-	git push origin data-$(DATASET_NAME)-v1.0.0
+	@if git rev-parse data-demo-wikitext-v1.0.0 >/dev/null 2>&1; then \
+		echo "Tag already exists: data-demo-wikitext-v1.0.0"; \
+	else \
+		git tag -a data-demo-wikitext-v1.0.0 -m "Dataset demo-wikitext v1.0.0 built"; \
+	fi
+	git push origin data-demo-wikitext-v1.0.0
 
 # Example: push v1.0.0 to HuggingFace Datasets (requires huggingface-cli login)
 HF_DATASET_ID := your-username/$(DATASET_NAME)
