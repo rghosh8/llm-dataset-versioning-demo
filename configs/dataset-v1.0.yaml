@@ -1,0 +1,19 @@
+version: "v1.0.0"
+
+source:
+  hf_dataset: "wikitext"
+  hf_config: "wikitext-2-raw-v1"
+  split: "train[:1%]"  # tiny subset for demo
+
+filters:
+  min_chars: 50
+  max_chars: 2000
+
+processing:
+  normalize_whitespace: true
+  strip_empty_lines: true
+
+output:
+  base_dir: "data/versions"
+  dataset_name: "demo-wikitext"
+  shard_size: 1000  # examples per shard
